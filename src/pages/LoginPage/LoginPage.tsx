@@ -1,14 +1,14 @@
-//@ts-nocheck
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../store/slices/authSlice";
+import { RootState, AppDispatch } from "../../store/store";
 
 const LoginPage: React.FC = () => {
     const [username, setUsername] = useState('');
-    const dispatch = useDispatch();
+    const dispatch: AppDispatch = useDispatch();
     const navigate = useNavigate();
-    const error = useSelector((state) => state.auth.error);
+    const error = useSelector((state: RootState) => state.auth.error);
 
     const handleLogin = async () => {
         const result = await dispatch(login(username));
@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
         }
     };
 
-    const changeHandle = (e) => {
+    const changeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
     }
 
