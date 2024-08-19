@@ -1,13 +1,21 @@
-//@ts-nocheck
 import { createSlice } from '@reduxjs/toolkit';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = {
+type AuthState = {
+  user: string | null;
+  error: string | null;
+}
+
+const initialState: AuthState = {
   user: null,
   error: null,
 };
 
-export const login = createAsyncThunk(
+export const login = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>(
   'auth/login',
   async (username, { rejectWithValue }) => {
     const allowedUsers = ['admin', 'user12'];
@@ -34,7 +42,7 @@ const authSlice = createSlice({
         state.error = null;
       })
       .addCase(login.rejected, (state, action) => {
-        state.error = action.payload;
+        state.error = action.payload as string;
       });
   },
 });

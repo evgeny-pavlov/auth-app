@@ -1,15 +1,15 @@
-//@ts-nocheck
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/slices/authSlice";
 import { useNavigate } from 'react-router-dom';
+import { RootState } from "../../store/store";
 
 const notes = 3;
 const tasks = 5;
 
 const ProfilePage: React.FC = () => {
-    const user = useSelector((state) => state.auth.user);
+    const user = useSelector((state: RootState) => state.auth.user);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
